@@ -1,21 +1,32 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Role } from 'src/common/constants';
 
-// این خط برای تایپ‌اسکریپت است تا بداند داکیومنت کاربر چه شکلی است
 export type UserDocument = HydratedDocument<User>;
 
-@Schema() // معادل new Schema()
+@Schema({ timestamps: true })
 export class User {
-  @Prop({ required: true }) // معادل { type: String, required: true }
+  @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true, unique: [true, 'ایمیل تکراری است'] }) // ایمیل باید یکتا باشد
+  @Prop({ required: true, unique: true, lowercase: true, trim: true })
   email: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, select: false, minlength: 6 })
   password: string;
-  // فیلد id_ به صورت خودکار توسط مونگو ساخته می‌شود، نیازی به تعریف نیست
+
+  @Prop({
+    required: true,
+    enum: Role,
+    default: Role.USER,
+  })
+  role: Role;
+
+  @Prop({ default: 'default-avatar.png' })
+  avatar: string;
+
+  @Prop()
+  deletedAt: Date;
 }
 
-// تبدیل کلاس بالا به اسکیمای استاندارد Mongoose
 export const UserSchema = SchemaFactory.createForClass(User);
