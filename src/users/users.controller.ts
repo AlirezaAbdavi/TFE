@@ -19,13 +19,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiBearerAuth()
 @Controller('users')
 export class UsersController {
-  // 1. تعریف سازنده برای تزریق وابستگی
   constructor(private readonly usersService: UsersService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
   getAllUsers() {
-    // 2. استفاده از سرویس برای دریافت اطلاعات
     return this.usersService.findAll();
   }
   @Post()

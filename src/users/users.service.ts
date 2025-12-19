@@ -30,7 +30,9 @@ export class UsersService {
   }
 
   async deleteOne(id: string) {
-    const user = await this.userModel.deleteOne({ id }).exec();
+    const user = await this.userModel
+      .updateOne({ id, deletedAt: new Date() })
+      .exec();
     if (!user) throw new NotFoundException('کاربر یافت نشد');
     return user;
   }
@@ -43,7 +45,10 @@ export class UsersService {
   }
 
   async findOneByEmail(email: string): Promise<User | null> {
-    const user = await this.userModel.findOne({ email }).exec();
+    const user = await this.userModel
+      .findOne({ email })
+      .select('+password')
+      .exec();
     if (!user) throw new NotFoundException('کاربر یافت نشد');
     return user;
   }

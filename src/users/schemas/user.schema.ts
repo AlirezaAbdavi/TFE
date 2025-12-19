@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Query } from 'mongoose';
+import { NotFoundException } from '@nestjs/common';
 import { Role } from 'src/common/constants';
 
 export type UserDocument = HydratedDocument<User>;
@@ -25,8 +26,15 @@ export class User {
   @Prop({ default: 'default-avatar.png' })
   avatar: string;
 
-  @Prop()
+  @Prop({ index: true })
   deletedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+// در فایل schema (مثلا user.schema.ts) قبل از ساختن مدل
+
+UserSchema.pre(/^find/, function (this: Query<any, any>, next) {
+  this.where({ deletedAt: null });
+  next();
+});

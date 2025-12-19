@@ -1,36 +1,30 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-Object.defineProperty(exports, "UsersController", {
-    enumerable: true,
-    get: function() {
-        return UsersController;
-    }
-});
-const _common = require("@nestjs/common");
-const _usersservice = require("./users.service");
-const _createuserdto = require("./dto/create-user.dto");
-const _updateuserdto = require("./dto/update-user.dto");
-const _passport = require("@nestjs/passport");
-const _swagger = require("@nestjs/swagger");
-function _ts_decorate(decorators, target, key, desc) {
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-function _ts_metadata(k, v) {
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-}
-function _ts_param(paramIndex, decorator) {
-    return function(target, key) {
-        decorator(target, key, paramIndex);
-    };
-}
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UsersController = void 0;
+const common_1 = require("@nestjs/common");
+const users_service_1 = require("./users.service");
+const create_user_dto_1 = require("./dto/create-user.dto");
+const update_user_dto_1 = require("./dto/update-user.dto");
+const passport_1 = require("@nestjs/passport");
+const swagger_1 = require("@nestjs/swagger");
 let UsersController = class UsersController {
+    usersService;
+    constructor(usersService) {
+        this.usersService = usersService;
+    }
     getAllUsers() {
-        // 2. استفاده از سرویس برای دریافت اطلاعات
         return this.usersService.findAll();
     }
     createNewUser(newUser) {
@@ -45,64 +39,48 @@ let UsersController = class UsersController {
     deleteUser(id) {
         return this.usersService.deleteOne(id);
     }
-    // 1. تعریف سازنده برای تزریق وابستگی
-    constructor(usersService){
-        this.usersService = usersService;
-    }
 };
-_ts_decorate([
-    (0, _common.UseGuards)((0, _passport.AuthGuard)('jwt')),
-    (0, _common.Get)(),
-    _ts_metadata("design:type", Function),
-    _ts_metadata("design:paramtypes", []),
-    _ts_metadata("design:returntype", void 0)
+exports.UsersController = UsersController;
+__decorate([
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "getAllUsers", null);
-_ts_decorate([
-    (0, _common.Post)(),
-    _ts_param(0, (0, _common.Body)()),
-    _ts_metadata("design:type", Function),
-    _ts_metadata("design:paramtypes", [
-        typeof _createuserdto.CreateUserDto === "undefined" ? Object : _createuserdto.CreateUserDto
-    ]),
-    _ts_metadata("design:returntype", void 0)
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "createNewUser", null);
-_ts_decorate([
-    (0, _common.Patch)(':id'),
-    _ts_param(0, (0, _common.Param)('id')),
-    _ts_param(1, (0, _common.Body)()),
-    _ts_metadata("design:type", Function),
-    _ts_metadata("design:paramtypes", [
-        String,
-        typeof _updateuserdto.UpdateUserDto === "undefined" ? Object : _updateuserdto.UpdateUserDto
-    ]),
-    _ts_metadata("design:returntype", void 0)
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "updateUser", null);
-_ts_decorate([
-    (0, _common.Get)(':id'),
-    _ts_param(0, (0, _common.Param)('id')),
-    _ts_metadata("design:type", Function),
-    _ts_metadata("design:paramtypes", [
-        String
-    ]),
-    _ts_metadata("design:returntype", void 0)
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "getUser", null);
-_ts_decorate([
-    (0, _common.Delete)(':id'),
-    _ts_param(0, (0, _common.Param)('id')),
-    _ts_metadata("design:type", Function),
-    _ts_metadata("design:paramtypes", [
-        String
-    ]),
-    _ts_metadata("design:returntype", void 0)
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
 ], UsersController.prototype, "deleteUser", null);
-UsersController = _ts_decorate([
-    (0, _swagger.ApiTags)('Users'),
-    (0, _swagger.ApiBearerAuth)(),
-    (0, _common.Controller)('users'),
-    _ts_metadata("design:type", Function),
-    _ts_metadata("design:paramtypes", [
-        typeof _usersservice.UsersService === "undefined" ? Object : _usersservice.UsersService
-    ])
+exports.UsersController = UsersController = __decorate([
+    (0, swagger_1.ApiTags)('Users'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.Controller)('users'),
+    __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
-
 //# sourceMappingURL=users.controller.js.map

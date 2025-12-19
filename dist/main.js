@@ -1,25 +1,24 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-const _core = require("@nestjs/core");
-const _appmodule = require("./app.module");
-const _common = require("@nestjs/common");
-const _swagger = require("@nestjs/swagger");
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@nestjs/core");
+const app_module_1 = require("./app.module");
+const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 async function bootstrap() {
-    const app = await _core.NestFactory.create(_appmodule.AppModule);
-    app.useGlobalPipes(new _common.ValidationPipe({
+    const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
-        forbidNonWhitelisted: true
+        forbidNonWhitelisted: true,
     }));
-    const config = new _swagger.DocumentBuilder().setTitle('NestJS Course API') // عنوان مستندات
-    .setDescription('مستندات API مدیریت کاربران') // توضیحات
-    .setVersion('1.0').addBearerAuth() // ✅ اضافه کردن دکمه لاگین (قفل) برای توکن JWT
-    .build();
-    const document = _swagger.SwaggerModule.createDocument(app, config);
-    _swagger.SwaggerModule.setup('api', app, document);
+    const config = new swagger_1.DocumentBuilder()
+        .setTitle('NestJS Course API')
+        .setDescription('مستندات API مدیریت کاربران')
+        .setVersion('1.0')
+        .addBearerAuth()
+        .build();
+    const document = swagger_1.SwaggerModule.createDocument(app, config);
+    swagger_1.SwaggerModule.setup('api', app, document);
     await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
-
 //# sourceMappingURL=main.js.map

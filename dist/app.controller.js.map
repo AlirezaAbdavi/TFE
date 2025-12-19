@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/app.controller.ts"],"sourcesContent":["import { Controller } from '@nestjs/common';\r\n\r\n@Controller()\r\nexport class AppController {}\r\n"],"names":["AppController"],"mappings":";;;;+BAGaA;;;eAAAA;;;wBAHc;;;;;;;AAGpB,IAAA,AAAMA,gBAAN,MAAMA;AAAe"}
+{"version":3,"file":"app.controller.js","sourceRoot":"","sources":["../src/app.controller.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA4C;AAGrC,IAAM,aAAa,GAAnB,MAAM,aAAa;CAAG,CAAA;AAAhB,sCAAa;wBAAb,aAAa;IADzB,IAAA,mBAAU,GAAE;GACA,aAAa,CAAG"}
