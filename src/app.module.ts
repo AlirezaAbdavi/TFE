@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigService, ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppServices } from './app.services';
-import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin-panel/admin.module';
 import { ClientModule } from './client-panel/client.module';
 
@@ -11,17 +10,10 @@ import { ClientModule } from './client-panel/client.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URI'), // خواندن از .env
-      }),
-      inject: [ConfigService],
-    }),
-    ClientModule,
+    PrismaModule,
+    AuthModule,
     AdminModule,
+    ClientModule,
   ],
-  controllers: [AppController],
-  providers: [AppServices],
 })
 export class AppModule {}

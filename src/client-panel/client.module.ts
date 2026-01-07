@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ClientController } from './client.controller';
-import { UsersModule } from 'src/users/users.module';
-import { AuthModule } from 'src/auth/auth.module';
+import { UsersModule } from '../modules/users/users.module';
+import { TasksModule } from '../modules/tasks/tasks.module';
+import { ClientUsersController } from './controllers/client-users.controller';
+import { ClientTasksController } from './controllers/client-tasks.controller';
 
 @Module({
-  imports: [UsersModule, AuthModule],
-  controllers: [ClientController],
-  providers: [],
-  exports: [],
+  imports: [UsersModule, TasksModule],
+  controllers: [ClientUsersController, ClientTasksController],
 })
 export class ClientModule {}
